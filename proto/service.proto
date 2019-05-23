@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "proto";
+
+import "person.proto";
+import "google/protobuf/empty.proto";
+//import "google/api/annotations.proto";
+
+message getPersonRequest {
+    int32 id = 1;
+}
+
+
+service HuaFu {
+    rpc GetPerson(getPersonRequest) returns (Person) {}
+//        option (google.api.http) = {
+//            post: "/v1/huafu/persion"
+//            body: "*"
+//        };
+//    }
+
+    rpc QueryPerson(stream getPersonRequest) returns (stream Person) {}
+
+    rpc ListPeople(google.protobuf.Empty) returns (stream Person) {}
+}
